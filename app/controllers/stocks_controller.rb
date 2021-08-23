@@ -5,7 +5,10 @@ class StocksController < ApplicationController
       # Stock.new_look -> Stock is class and new_look is method of that class from stock.rb
       # render json: @stock
       if @stock
-        render 'users/my_portfolio'
+        respond_to do |format|
+          format.js { render partial: 'users/result' }
+        end
+        # render 'users/my_portfolio'
       else
         flash[:alert] = 'Please enter a valid symbol to search'
         redirect_to my_portfolio_path
